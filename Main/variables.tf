@@ -44,3 +44,4 @@ variable "s3_tags" {
   }
   
 }
+

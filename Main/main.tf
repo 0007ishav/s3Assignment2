@@ -23,14 +23,19 @@ module "myEC2Instance" {
     )
 }
 
-module "myS3Bucket" {
-  source = "../countS3"
-  count = length(var.bucket_names)
-  bucket = var.bucket_names[count.index]
-  s3_tags = merge(
-    var.s3_tags,
-    {
-        Name = var.bucket_names[count.index]
-    }
-  )
+# module "myS3Bucket" {
+#   source = "../countS3"
+#   count = length(var.bucket_names)
+#   bucket = var.bucket_names[count.index]
+#   s3_tags = merge(
+#     var.s3_tags,
+#     {
+#         Name = var.bucket_names[count.index]
+#     }
+#   )
+# }
+
+module "mySecurityGroup7" {
+  source = "../securityGroup"
+  cidr_blocks = [module.myEC2Instance["ishav1"].ip]
 }
